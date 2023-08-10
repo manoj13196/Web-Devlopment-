@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img width="200" height="100" src="https://yhills.com/wp-content/uploads/2022/11/YHills-logo-03-2-01-1-e1668754470419.png" class="default-logo" alt="YHills - Elearning In India">
+        <div class="log">
+            <ul type="none">
+                <li><a href="./project-1.html">HOME</a></li>
+                <li><a href="profile.html">PROFILE</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="tutorial-section">
+        <h2>Tutorial Videos</h2>
+        <div class="tutorial-container">
+            <div class="tutorial">
+                <iframe width="560" height="315" src="images/tutorial.mp4" frameborder="0" allowfullscreen onclick="countClick('HTML')"></iframe>
+                <p class="tutorial-description">Introduction to HTML</p>
+                <div class="description">
+                    <h3>HTML Basics</h3>
+                    <p>Learn the fundamentals of HTML and how to create web pages using HTML tags.</p>
+                </div>
+            </div>
+            
+            <div class="tutorial">
+                <iframe width="560" height="315" src="images/tutorial.mp4" frameborder="0" allowfullscreen onclick="countClick('CSS')"></iframe>
+                <p class="tutorial-description">CSS Basics</p>
+                <div class="description">
+                    <h3>CSS Styling</h3>
+                    <p>Explore CSS styling techniques to enhance the appearance of your web pages.</p>
+                </div>
+            </div>
+            <div class="tutorial">
+                <iframe width="560" height="315" src="images/tutorial.mp4" frameborder="0" allowfullscreen onclick="countClick('JavaScript')"></iframe>
+                <p class="tutorial-description">JavaScript Fundamentals</p>
+                <div class="description">
+                    <h3>JavaScript Programming</h3>
+                    <p>Discover the power of JavaScript and how to add interactivity to your web pages.</p>
+                </div>
+            </div>
+            <div class="tutorial">
+                <iframe width="560" height="315" src="images/tutorial.mp4" frameborder="0" allowfullscreen onclick="countClick('MySQL')"></iframe>
+                <p class="tutorial-description">MYSQL basics</p>
+                <div class="description">
+                    <h3>MYSQL Basics</h3>
+                    <p>MySQL Cluster enables users to meet the database challenges of next generation web, cloud, and communications services with uncompromising scalability, uptime .</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <!-- Footer content here -->
+    </footer>
+
+    <script>
+        function countClick(topic) {
+            // Retrieve the username from local storage
+            var username = localStorage.getItem('username');
+
+            // Initialize the click count for the topic
+            var clickCount = 0;
+
+            // Retrieve the current click count for the topic from local storage
+            var storedClickCount = localStorage.getItem(topic);
+
+            if (storedClickCount) {
+                // If the click count exists, parse it to an integer
+                clickCount = parseInt(storedClickCount);
+            }
+
+            // Increment the click count
+            clickCount++;
+
+            // Store the updated click count in local storage
+            localStorage.setItem(topic, clickCount);
+
+            // Display the click count to the user
+            alert("Topic: " + topic + "\nUsername: " + username + "\nClick Count: " + clickCount);
+        }
+    </script>
+</body>
+</html>

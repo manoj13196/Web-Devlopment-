@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Dashboard</title>
+  <style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 50px;
+    background-color: #d0dbd0;
+  }
+
+  h1 {
+    text-align: center;
+    color: #0a0a0a;
+  }
+
+  .profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 300px;
+    margin-top: 30px;
+  }
+
+  .profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 30px;
+    border: 2px solid #000;
+    border-radius: 10px;
+    background-color: #e6a714;
+  }
+
+  .profile img {
+    width: 150px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+
+  .profile-info {
+    text-align: center;
+    color: #181717;
+  }
+
+  .profile-info p {
+    margin: 15px 0;
+  }
+
+  .edit-form {
+    text-align: left;
+    margin-top: 60px;
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    padding: 30px;
+    border: 2px solid #000;
+    border-radius: 5px;
+    background-color: #e6a714;
+  }
+
+  .edit-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+  }
+
+  .edit-form input[type="text"] {
+    width: 200px;
+    padding: 10px;
+  }
+
+  .edit-form button {
+    padding: 5px 10px;
+    background-color: #0fa614;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .edit-form button:hover {
+    background-color: #67d46d;
+  }
+
+  .editing {
+    background-color: #FFFFCC;
+  }
+
+  .course-list {
+      margin-top: 20px;
+      text-align: left;
+      position: absolute;
+      top: 20px;
+      left: 50px;
+  }
+
+  .course-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .course-list li {
+    margin-bottom: 10px;
+    background-color: #e6a714;
+    border: 2px solid #151313;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .course-list li:hover {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .course-list a {
+    text-decoration: none;
+    color: #0e0d0d;
+    font-weight: bold;
+    display: block;
+    padding: 10px;
+  }
+
+  .course-list a:hover {
+    background-color: #d9fa54;
+  }
+
+  .course-details {
+    padding: 10px;
+  }
+
+  .course-details h3 {
+    margin: 0;
+    color: #151515;
+  }
+
+  .course-details p {
+    margin: 5px 0;
+    color: #373333;
+  }
+
+  .course-details button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: rgb(11, 9, 9);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .course-details button:hover {
+    background-color: #45a049;
+  }
+
+  .completed {
+    text-decoration: line-through;
+  }
+  .course-details img {
+      width: 80px;
+      height: 50px;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Student Dashboard</h1>
+
+  <div class="profile-container">
+    <div class="profile">
+      <img src="images/pro.jpeg" alt="Profile Picture">
+      <div class="profile-info">
+        <p><strong>Name:</strong> <span id="profile-name">John Doe</span></p>
+        <p><strong>Student ID:</strong> <span id="profile-student-id">123456</span></p>
+        <p><strong>Major:</strong> <span id="profile-major">Computer Science</span></p>
+        <p><strong>Email:</strong> <span id="profile-email">john.doe@example.com</span></p>
+        <p><strong>Mobile:</strong> <span id="profile-mobile">123-456-7890</span></p>
+      </div>
+    </div>
+
+    <div class="edit-form">
+        <h3>Edit details</h3>
+      <label for="name">Name:</label>
+      <input type="text" id="name" value="John Doe" disabled>
+      <br>
+      <label for="student-id">Student ID:</label>
+      <input type="text" id="student-id" value="123456" disabled>
+      <br>
+      <label for="major">Major:</label>
+      <input type="text" id="major" value="Computer Science" disabled>
+      <br>
+      <label for="email">Email:</label>
+      <input type="text" id="email" value="john.doe@example.com" disabled>
+      <br>
+      <label for="mobile">Mobile:</label>
+      <input type="text" id="mobile" value="123-456-7890" disabled>
+      <br>
+      <button onclick="enableEdit()">Edit</button>
+      <button onclick="saveChanges()" disabled>Save</button>
+    </div>
+  </div>
+
+  <div class="course-list">
+    <h2>My Courses</h2>
+    <ul>
+      <li>
+        <a href="#">
+          <div class="course-details">
+            <img src="images/Python-Symbol.jpeg" alt="python">
+            <h3>Python</h3>
+            <p><strong>Start Date:</strong> May 1, 2023</p>
+            <button onclick="completeCourse(this)">Completed</button>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <div class="course-details">
+            <img src="images/full stack.jpeg" alt="Course 2">
+            <h3>full stack</h3>
+            <p><strong>Start Date:</strong> June 1, 2023</p>
+            <button onclick="completeCourse(this)">Completed</button>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <div class="course-details">
+            <img src="images/machine learning.jpeg" alt="Course 3">
+            <h3>Machine learning</h3>
+            <p><strong>Start Date:</strong> July 1, 2023</p>
+            <button onclick="completeCourse(this)">Completed</button>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <script>
+    function enableEdit() {
+      document.getElementById('name').disabled = false;
+      document.getElementById('student-id').disabled = false;
+      document.getElementById('major').disabled = false;
+      document.getElementById('email').disabled = false;
+      document.getElementById('mobile').disabled = false;
+      document.getElementById('name').focus();
+      document.getElementById('student-id').focus();
+      document.getElementById('major').focus();
+      document.getElementById('email').focus();
+      document.getElementById('mobile').focus();
+      document.getElementById('name').select();
+      document.getElementById('student-id').select();
+      document.getElementById('major').select();
+      document.getElementById('email').select();
+      document.getElementById('mobile').select();
+      document.getElementsByClassName('edit-form')[0].classList.add('editing');
+      document.getElementsByTagName('button')[0].disabled = true;
+      document.getElementsByTagName('button')[1].disabled = false;
+    }
+    function saveChanges() {
+  // JavaScript code for saving changes and disabling edit mode
+
+  // Get the entered signup information
+  var name = document.getElementById('name').value;
+  var studentId = document.getElementById('student-id').value;
+  var major = document.getElementById('major').value;
+  var email = document.getElementById('email').value;
+  var mobile = document.getElementById('mobile').value;
+
+  // Store the signup information in local storage
+  localStorage.setItem('name', name);
+  localStorage.setItem('studentId', studentId);
+  localStorage.setItem('major', major);
+  localStorage.setItem('email', email);
+  localStorage.setItem('mobile', mobile);
+
+  // Reflect the changes in the profile section
+  document.getElementById('profile-name').textContent = name;
+  document.getElementById('profile-student-id').textContent = studentId;
+  document.getElementById('profile-major').textContent = major;
+  document.getElementById('profile-email').textContent = email;
+  document.getElementById('profile-mobile').textContent = mobile;
+
+  // Disable edit mode
+  document.getElementById('name').disabled = true;
+  document.getElementById('student-id').disabled = true;
+  document.getElementById('major').disabled = true;
+  document.getElementById('email').disabled = true;
+  document.getElementById('mobile').disabled = true;
+  document.getElementsByClassName('edit-form')[0].classList.remove('editing');
+  document.getElementsByTagName('button')[0].disabled = false;
+  document.getElementsByTagName('button')[1].disabled = true;
+}
+
+
+    function completeCourse(button) {
+      button.parentNode.parentNode.classList.toggle('completed');
+      if (button.innerHTML === 'Completed') {
+        button.innerHTML = 'Mark as Completed';
+      } else {
+        button.innerHTML = 'Completed';
+      }
+    }
+    window.addEventListener('load', function() {
+      var name = localStorage.getItem('name');
+      var studentId = localStorage.getItem('studentId');
+      var major = localStorage.getItem('major');
+      var email = localStorage.getItem('email');
+      var mobile = localStorage.getItem('mobile');
+
+      if (name) document.getElementById('name').value = name;
+      if (studentId) document.getElementById('student-id').value = studentId;
+      if (major) document.getElementById('major').value = major;
+      if (email) document.getElementById('email').value = email;
+      if (mobile) document.getElementById('mobile').value = mobile;
+
+      // Reflect the saved values in the profile section
+      document.getElementById('profile-name').textContent = name || "John Doe";
+      document.getElementById('profile-student-id').textContent = studentId || "123456";
+      document.getElementById('profile-major').textContent = major || "Computer Science";
+      document.getElementById('profile-email').textContent = email || "john.doe@example.com";
+      document.getElementById('profile-mobile').textContent = mobile || "123-456-7890";
+    });
+  </script>
+</body>
+</html>

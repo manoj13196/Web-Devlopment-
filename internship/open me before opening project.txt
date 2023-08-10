@@ -1,0 +1,9 @@
+open project-1
+
+click login
+
+give random values and click login
+
+you will be redirected to tutorial page
+
+click profile to see profile
